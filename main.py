@@ -48,9 +48,7 @@ def new_post():
 @app.route('/single_template', methods=['POST', 'GET'])
 def single_template():
 
-
-
-    blogs = Blog.query.filter_by().first()
+    blogs = Blog.query.filter_by(id=5).first()
 
     request.args.get('blogs.title')
 

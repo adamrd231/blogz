@@ -15,7 +15,8 @@
     {%for blog in blogs %}
     <li><a href="http://127.0.0.1:5000/single_template">{{blog.title}}</a>
       {{blog.content}}
-      <form method="POST" action="/delete-blog" style="display:inline-block;">
+      <form method="POST" action="/single_template?id={{blog.id}}" style="display:inline-block;">
+      <!-- <input type="submit" value="Done!" /> -->
           <!-- <input type="submit" value="Create Blog!" /> -->
           <input type="hidden" name="blog-id" value="{{blog.id}}" />
       </form>
