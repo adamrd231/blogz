@@ -13,9 +13,9 @@
   <ul>
 <!-- MAKE SURE TO MATCH THE BLOGS VARIABLE PASSED IN FROM MAIN.PY -->
     {%for blog in blogs %}
-    <li><a href="http://127.0.0.1:5000/single_template">{{blog.title}}</a>
-      {{blog.content}}
-      <form method="POST" action="/single_template?id={{blog.id}}" style="display:inline-block;">
+        <li>
+            <a href="/single_template?id={{blog.id}}">{{blog.title}}</a>
+          {{blog.content}}
       <!-- <input type="submit" value="Done!" /> -->
           <!-- <input type="submit" value="Create Blog!" /> -->
           <input type="hidden" name="blog-id" value="{{blog.id}}" />
