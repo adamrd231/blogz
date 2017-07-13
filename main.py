@@ -44,5 +44,18 @@ def new_post():
     return render_template('new_post.html')
 
 
+
+@app.route('/single_template', methods=['POST', 'GET'])
+def single_template():
+
+
+
+    blogs = Blog.query.filter_by().first()
+
+    request.args.get('blogs.title')
+
+    return render_template('single_template.html', blogs=blogs)
+
+
 if __name__ == "__main__":
     app.run()

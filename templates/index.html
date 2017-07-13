@@ -2,7 +2,7 @@
 
 {% block content %}
 
-
+<h1>Welcome to Blog</h1>
 
 <!-- MAKE SURE TO MATCH THE BLOGS VARIABLE PASSED IN FROM MAIN.PY -->
 {% if blogs |length == 0  %}
@@ -13,12 +13,13 @@
   <ul>
 <!-- MAKE SURE TO MATCH THE BLOGS VARIABLE PASSED IN FROM MAIN.PY -->
     {%for blog in blogs %}
-    <li><a href="">{{blog.title}}</a>
+    <li><a href="http://127.0.0.1:5000/single_template">{{blog.title}}</a>
       {{blog.content}}
       <form method="POST" action="/delete-blog" style="display:inline-block;">
           <!-- <input type="submit" value="Create Blog!" /> -->
           <input type="hidden" name="blog-id" value="{{blog.id}}" />
       </form>
+      <hr />
     </li>
     {% endfor %}
   </ul>
