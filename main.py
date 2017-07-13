@@ -43,7 +43,9 @@ def new_post():
         db.session.add(new_blog)
         db.session.commit()
 
-        return redirect('/')
+        url = "/single_template?id=" + str(new_blog.id)
+
+        return redirect(url)
 
 
     return render_template('new_post.html')
@@ -54,7 +56,6 @@ def new_post():
 def single_template():
 
     blog_id = request.args.get('id')
-    print(blog_id)
     blogs = Blog.query.filter_by(id=blog_id).first()
 
     return render_template('single_template.html', blogs=blogs)
