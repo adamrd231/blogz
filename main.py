@@ -54,8 +54,8 @@ def new_post():
 def single_template():
 
     blog_id = request.args.get('id')
-
-    blogs = Blog.query.filter_by().first()
+    print(blog_id)
+    blogs = Blog.query.filter_by(id=blog_id).first()
 
     return render_template('single_template.html', blogs=blogs)
 
