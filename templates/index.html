@@ -2,7 +2,30 @@
 
 {% block content %}
 
-<h1>Test</h1>
+
+
+<!-- MAKE SURE TO MATCH THE BLOGS VARIABLE PASSED IN FROM MAIN.PY -->
+{% if blogs |length == 0  %}
+<p>
+  No blogs yet...
+</p>
+{%  else  %}
+  <ul>
+<!-- MAKE SURE TO MATCH THE BLOGS VARIABLE PASSED IN FROM MAIN.PY -->
+    {%for blog in blogs %}
+    <li><a href="">{{blog.title}}</a>
+      {{blog.content}}
+      <form method="POST" action="/delete-blog" style="display:inline-block;">
+          <!-- <input type="submit" value="Create Blog!" /> -->
+          <input type="hidden" name="blog-id" value="{{blog.id}}" />
+      </form>
+    </li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+<hr />
+
 
 
 {% endblock %}
