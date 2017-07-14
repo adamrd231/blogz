@@ -15,8 +15,7 @@ input {
 .navbar {
   background-color: #333333;
   color: white;
-  border: .5em solid #777777;
-  border-radius: .5em;
+  border-radius: .2em;
   margin-bottom: 2%;
 }
 
@@ -24,7 +23,7 @@ input {
   color: white;
   text-decoration: none;
   font-size: 2em;
-  padding: 1%;
+  padding: 2%;
 }
 
 .link:hover {
