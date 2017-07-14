@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<h1>Welcome to Blog</h1>
+<h1>Welcome to the Blog</h1>
 
 <!-- MAKE SURE TO MATCH THE BLOGS VARIABLE PASSED IN FROM MAIN.PY -->
 {% if blogs |length == 0  %}
@@ -20,7 +20,10 @@
           <!-- <input type="submit" value="Create Blog!" /> -->
           <input type="hidden" name="blog-id" value="{{blog.id}}" />
       </form>
-      <hr />
+      <form method="POST" action="/delete-task">
+          <input type="submit" value="Delete!" />
+          <input type="hidden" name="blog-id" value="{{blog.id}}" />
+      </form>
     </li>
     {% endfor %}
   </ul>

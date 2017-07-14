@@ -6,10 +6,10 @@
 <h1>Build Your Blog Post</h1>
 <form method='post'>
   <label> New Blog Title
-    <input type="text" name="blog" />
+    <input type="text" name="blog" value="{{ blog_name }}" />
   </label>
   <label> New Blog Content
-    <input type="text" name="content" />
+    <input type="text" name="content" value="{{ blog_content }}" />
   </label>
   <input type="submit" value="Add Blog" />
 </form>

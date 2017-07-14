@@ -6,9 +6,16 @@
     </head>
   <body>
 
-  <a href="http://127.0.0.1:5000/">Home</a> <a href="http://127.0.0.1:5000/new_post">New Post</a>
-  <br />
-  <br />
+{% with messages = get_flashed_messages(with_categories=True) %}
+    <div>
+      {% for category,message in messages %}
+        <li class="{{category}}">{{message}}</li>
+      {% endfor %}
+    </div>
+{% endwith %}
+<div class="navbar">
+  <a class="link" href="http://127.0.0.1:5000/">Home</a> <a class="link" href="http://127.0.0.1:5000/new_post">New Post</a>
+</div>
 
     {%  block content  %}
     {%  endblock  %}

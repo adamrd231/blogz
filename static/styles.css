@@ -1,3 +1,41 @@
 * {
-  font-family: Helvetica;
+  font-family: Raleway, Helvetica;
+  margin: 0;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  width: 10em;
+}
+
+.navbar {
+  background-color: #333333;
+  color: white;
+  border: .5em solid #777777;
+  border-radius: .5em;
+  margin-bottom: 2%;
+}
+
+.link {
+  color: white;
+  text-decoration: none;
+  font-size: 2em;
+  padding: 1%;
+}
+
+.link:hover {
+  background-color: white;
+  color: #333333;
+}
+
+.message {
+  background-color: red;
+  color: white;
+  margin:0;
+  padding: 1%;
+  list-style: none;
 }
