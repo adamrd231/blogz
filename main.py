@@ -66,14 +66,14 @@ def index():
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'POST':
-        username = request.form['email']
+        username = request.form['username']
         password = request.form['password']
-        user = User.query.filter_by(username=username).first()
+        login_info = User.query.filter_by(username=username).first()
 
-        if user and user.password == password:
+        if login_info and login_info.password == password:
             session['username'] = username
             flash("Logged in")
-            redirect('/new_post')
+            return redirect('/new_post')
         else:
             flash('User name or password incorrect, or does not exist.')
 
@@ -86,6 +86,11 @@ def register():
         password = request.form['password']
         verify = request.form['verify']
 
+        if username == "" or password == "" or verify == "":
+            flash('Please Enter a username, password and matching verification')
+            return render_template('register.html', username=username)
+
+
         # - Validate the users data
         existing_user = User.query.filter_by(username=username).first()
 
@@ -96,11 +101,11 @@ def register():
             db.session.commit()
             #todo - Remember the user
             session['username'] = username
-            flash("logged in")
+            flash("Registered User")
             return redirect('/new_post')
         else:
             # todo - user better response message
-            return "<h1>Duplicate User</h1>"
+            flash('Duplicate User')
 
     return render_template('register.html')
 
