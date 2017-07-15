@@ -44,36 +44,37 @@ class User(db.Model):
         self.username = username
         self.password = password
 
-#Requires the user to be signed in i
-#TODO allow the user to see blog pages when NOT signed in as user
-
+#Requires the user to be logged in as an account user in order to make posts
 @app.before_request
 def require_login():
-    allowed_routes = ['login', 'register', 'display_blogs' , 'index']
+    #controls which routes a non-logged in user can view, this is based on the function name
+    allowed_routes = ['login', 'register', 'blogs' , 'index']
     if request.endpoint not in allowed_routes and 'username' not in session:
         return redirect('/login')
 
-#Reroute from home index to the home page
+
+#ROUTE FOR HOMEPAGE, DISPLAYS ALL USERS WHO HAVE REGISTERED WITH THE APP
 @app.route('/', methods=['POST', 'GET'])
 def index():
     users = User.query.all()
-    blogs = Blog.query.all()
 
     return render_template('index.html',
           title="BLOG",
-          users=users,
-          blogs=blogs
+          users=users
           )
 
 
-#THIS IS THE HOME PAGE
-@app.route('/blog', methods=['POST', 'GET'])
-def display_blogs():
+#THIS PAGE CONTROLS HOW THE PAGE FILTERS RESULTS BY USER OR BY ID
+@app.route('/blogs', methods=['POST', 'GET'])
+def blogs():
 
+    #THIS GRABS THE ID ATTRIBUTE FROM THE TITLE LINK (WHICH HAS THE VARIABLE INSIDE THE HTTP ADDRESS)
     blog_id = request.args.get('id')
     if (blog_id):
         blogs = Blog.query.filter_by(id=blog_id).first()
-        return render_template('single_template.html', blogs=blogs)
+        #TODO filter result so that the matching username is populated with the blog, not the 
+        user = User.query.filter_by().first()
+        return render_template('single_template.html', blogs=blogs, user=user)
 
     user_id = request.args.get('user')
     if (user_id):
@@ -171,7 +172,7 @@ def new_post():
         if new_blog.is_valid():
             db.session.add(new_blog)
             db.session.commit()
-            url = "/blog?id=" + str(new_blog.id)
+            url = "/blogs?id=" + str(new_blog.id)
             return redirect(url)
 
         else:

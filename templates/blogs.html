@@ -14,7 +14,7 @@
 <!-- MAKE SURE TO MATCH THE BLOGS VARIABLE PASSED IN FROM MAIN.PY -->
     {%for blog in blogs %}
         <li>
-          <a href="http://127.0.0.1:5000/blog?id={{blog.id}}">{{blog.title}}</a>
+          <a href="http://127.0.0.1:5000/blogs?id={{blog.id}}">{{blog.title}}</a>
           {{blog.content}}
           {{blog.owner_id}}
 

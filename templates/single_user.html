@@ -4,7 +4,7 @@
 
 <h1>Blog Posts!</h1>
 {% for blog in blogs %}
-<a href="http://127.0.0.1:5000/blog?id={{blog.id}}">{{blog.title}}</a>
+<a href="http://127.0.0.1:5000/blogs?id={{blog.id}}">{{blog.title}}</a>
 <br />
 {{blog.content}}
 <br />
