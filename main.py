@@ -20,9 +20,10 @@ class Blog(db.Model):
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     #Instantiate the attributes of our blog object
-    def __init__(self, title, content):
+    def __init__(self, title, content, owner):
         self.title = title
         self.content = content
+        self.owner = owner
 
     #Keep helper functions inside of the class, this one checks that you have something in both title and content.
     def is_valid(self):
@@ -36,14 +37,19 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), unique=True)
     password = db.Column(db.String(15))
-
-    #TODO I am not super clear on this realtionship part, especially the backref portion
     blogs = db.relationship('Blog', backref='owner')
+
 
     def __init__(self, username, password):
         self.username = username
         self.password = password
 
+#Requires the user to be signed in i
+@app.before_request
+def require_login():
+    allowed_routes = ['login', 'register', 'index']
+    if request.endpoint not in allowed_routes and 'username' not in session:
+        return redirect('/login')
 
 #Reroute from home index to the home page
 @app.route('/', methods=['POST', 'GET'])
@@ -78,6 +84,11 @@ def login():
             flash('User name or password incorrect, or does not exist.')
 
     return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    del session['username']
+    return redirect('/blog')
 
 @app.route('/register', methods=['POST', 'GET'])
 def register():
@@ -131,7 +142,8 @@ def new_post():
 
         blog_name = request.form['blog']
         blog_content = request.form['content']
-        new_blog = Blog(blog_name, blog_content)
+        owner = User.query.filter_by(username=session['username']).first()
+        new_blog = Blog(blog_name, blog_content, owner)
 
         if new_blog.is_valid():
             db.session.add(new_blog)
@@ -158,6 +170,8 @@ def single_template():
 
     blog_id = request.args.get('id')
     blogs = Blog.query.filter_by(id=blog_id).first()
+
+
 
     return render_template('single_template.html', blogs=blogs)
 
