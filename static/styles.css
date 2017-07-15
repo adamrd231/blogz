@@ -13,6 +13,9 @@ input {
 }
 
 .navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   background-color: #333333;
   color: white;
   border-radius: .2em;
@@ -22,8 +25,8 @@ input {
 .link {
   color: white;
   text-decoration: none;
-  font-size: 2em;
-  padding: 2%;
+  font-size: 1.3em;
+  padding: 1%;
 }
 
 .link:hover {

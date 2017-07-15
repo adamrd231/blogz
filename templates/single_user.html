@@ -2,12 +2,12 @@
 
 {% block content %}
 
-<h1>{{blogs.title}}</h1>
+<h1>Blog Posts!</h1>
+{% for user in users %}
+{{user.blogs}}
 
- <br/>
-{{blogs.content}}
-<br />
+{% endfor %}
+{{blogs.title}}
 <!-- TODO figure out how to show owner name vs object -->
-{{blogs.owner}}
 
 {% endblock %}

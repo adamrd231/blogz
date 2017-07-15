@@ -2,28 +2,23 @@
 
 {% block content %}
 
-<h1>Welcome to the Blog</h1>
+<h1>All Blog Poster's</h1>
 
 <!-- MAKE SURE TO MATCH THE BLOGS VARIABLE PASSED IN FROM MAIN.PY -->
-{% if blogs |length == 0  %}
+{% if users |length == 0  %}
 <p>
-  No blogs yet...
+  No users yet...
 </p>
 {%  else  %}
   <ul>
 <!-- MAKE SURE TO MATCH THE BLOGS VARIABLE PASSED IN FROM MAIN.PY -->
-    {%for blog in blogs %}
+    {%for user in users %}
         <li>
-            <a href="/single_template?id={{blog.id}}">{{blog.title}}</a>
-          {{blog.content}}
+            <a href="/blog?user={{user.username}}">{{user.username}}</a>
       <!-- <input type="submit" value="Done!" /> -->
           <!-- <input type="submit" value="Create Blog!" /> -->
-          <input type="hidden" name="blog-id" value="{{blog.id}}" />
       </form>
-      <form method="POST" action="/delete-task">
-          <input type="submit" value="Delete!" />
-          <input type="hidden" name="blog-id" value="{{blog.id}}" />
-      </form>
+
     </li>
     {% endfor %}
   </ul>

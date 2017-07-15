@@ -10,7 +10,7 @@ db = SQLAlchemy(app)
 #TODO figure out what the heck this secret key is
 app.secret_key = "abc"
 
-
+#TODO WHY DOES CSS STYLING DISSAPEAR WHEN I AM NOT LOGGED IN?
 #Create class blogs, making them persistent and attaching the information to the database
 class Blog(db.Model):
 
@@ -45,6 +45,8 @@ class User(db.Model):
         self.password = password
 
 #Requires the user to be signed in i
+#TODO allow the user to see blog pages when NOT signed in as user
+
 @app.before_request
 def require_login():
     allowed_routes = ['login', 'register', 'display_blogs' , 'index']
@@ -61,11 +63,26 @@ def index():
 @app.route('/blog', methods=['POST', 'GET'])
 def display_blogs():
 
-    blogs = Blog.query.all()
+    blog_id = request.args.get('id')
+    if (blog_id):
+        blogs = Blog.query.filter_by(id=blog_id).first()
+        return render_template('single_template.html', blogs=blogs)
+
+    user_id = request.args.get('user')
+    if (user_id):
+        users = User.query.filter_by(username=user_id).all()
+        blogs = Blog.query.all()
+        return render_template('single_user.html', users=users, blogs=blogs)
+
+
+
+
+
+    users = User.query.all()
 
     return render_template('index.html',
           title="BLOG",
-          blogs=blogs,
+          users=users
           )
 
 
@@ -85,10 +102,12 @@ def login():
 
     return render_template('login.html')
 
+
+#TODO when logged in, takes you to the home screen, when logged out. Takes you to the login
 @app.route('/logout')
 def logout():
     del session['username']
-    return redirect('/blog')
+    return redirect('/')
 
 @app.route('/register', methods=['POST', 'GET'])
 def register():
@@ -162,19 +181,5 @@ def new_post():
     else: # GET request
         return render_template('new_post.html')
 
-
-
-#TEMPLATE TO CREATE BLOG PAGES, THIS IS REUSED FOR EVERY BLOG ENTRY.
-@app.route('/single_template', methods=['GET'])
-def single_template():
-
-    blog_id = request.args.get('id')
-    blogs = Blog.query.filter_by(id=blog_id).first()
-
-
-
-    return render_template('single_template.html', blogs=blogs)
-
-
 if __name__ == "__main__":
-    app.run()
+        app.run()
