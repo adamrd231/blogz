@@ -47,19 +47,19 @@ class User(db.Model):
 #Requires the user to be signed in i
 @app.before_request
 def require_login():
-    allowed_routes = ['login', 'register', 'index']
+    allowed_routes = ['login', 'register', 'display_blogs' , 'index']
     if request.endpoint not in allowed_routes and 'username' not in session:
         return redirect('/login')
 
 #Reroute from home index to the home page
 @app.route('/', methods=['POST', 'GET'])
-def re_direct():
+def index():
     return redirect('/blog')
 
 
 #THIS IS THE HOME PAGE
 @app.route('/blog', methods=['POST', 'GET'])
-def index():
+def display_blogs():
 
     blogs = Blog.query.all()
 
