@@ -70,13 +70,9 @@ def display_blogs():
 
     user_id = request.args.get('user')
     if (user_id):
-        users = User.query.filter_by(username=user_id).all()
-        blogs = Blog.query.all()
+        users = User.query.filter_by()
+        blogs = Blog.query.filter_by()
         return render_template('single_user.html', users=users, blogs=blogs)
-
-
-
-
 
     users = User.query.all()
 
@@ -167,7 +163,7 @@ def new_post():
         if new_blog.is_valid():
             db.session.add(new_blog)
             db.session.commit()
-            url = "/single_template?id=" + str(new_blog.id)
+            url = "/blog?id=" + str(new_blog.id)
             return redirect(url)
 
         else:

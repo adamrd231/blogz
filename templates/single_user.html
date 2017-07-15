@@ -3,11 +3,15 @@
 {% block content %}
 
 <h1>Blog Posts!</h1>
-{% for user in users %}
-{{user.blogs}}
-
+{% for blog in blogs %}
+{{blog.title}}
+<br />
+{{blog.content}}
+<br />
+{{blog.owner_id}}
+<hr />
 {% endfor %}
-{{blogs.title}}
+
 <!-- TODO figure out how to show owner name vs object -->
 
 {% endblock %}
