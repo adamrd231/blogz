@@ -56,7 +56,14 @@ def require_login():
 #Reroute from home index to the home page
 @app.route('/', methods=['POST', 'GET'])
 def index():
-    return redirect('/blog')
+    users = User.query.all()
+    blogs = Blog.query.all()
+
+    return render_template('index.html',
+          title="BLOG",
+          users=users,
+          blogs=blogs
+          )
 
 
 #THIS IS THE HOME PAGE
@@ -74,10 +81,12 @@ def display_blogs():
         return render_template('single_user.html', blogs=blogs)
 
     users = User.query.all()
+    blogs = Blog.query.all()
 
-    return render_template('index.html',
+    return render_template('blogs.html',
           title="BLOG",
-          users=users
+          users=users,
+          blogs=blogs
           )
 
 

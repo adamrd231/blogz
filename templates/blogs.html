@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>All Blog Poster's</h1>
+
+<!-- MAKE SURE TO MATCH THE BLOGS VARIABLE PASSED IN FROM MAIN.PY -->
+{% if blogs |length == 0  %}
+<p>
+  No users yet...
+</p>
+{%  else  %}
+  <ul>
+<!-- MAKE SURE TO MATCH THE BLOGS VARIABLE PASSED IN FROM MAIN.PY -->
+    {%for blog in blogs %}
+        <li>
+          <a href="http://127.0.0.1:5000/blog?id={{blog.id}}">{{blog.title}}</a>
+          {{blog.content}}
+          {{blog.owner_id}}
+
+    </li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+<hr />
+
+
+
+{% endblock %}
