@@ -70,9 +70,8 @@ def display_blogs():
 
     user_id = request.args.get('user')
     if (user_id):
-        users = User.query.filter_by()
-        blogs = Blog.query.filter_by()
-        return render_template('single_user.html', users=users, blogs=blogs)
+        blogs = Blog.query.filter_by(owner_id=user_id)
+        return render_template('single_user.html', blogs=blogs)
 
     users = User.query.all()
 
