@@ -2,16 +2,15 @@
 
 {% block content %}
 
-<h1>Blog Posts!</h1>
-{% for blog in blogs %}
-<a href="http://127.0.0.1:5000/blogs?id={{blog.id}}">{{blog.title}}</a>
-<br />
-{{blog.content}}
-<br />
-{{blog.owner_id}}
-<hr />
-{% endfor %}
+<h1>{{user_name}}'s Blog Posts!</h1>
 
-<!-- TODO figure out how to show owner name vs object -->
+<!-- RUN A LOOP TO SHOW ALL OF THE BLOGS ASSOCIATED WITH A SINGLE USER -->
+<div class="all_blog">
+  {% for blog in blogs %}
+  <a class="title" href="http://127.0.0.1:5000/blogs?id={{blog.id}}">{{blog.title}}</a>
+  {{blog.content}}
+  <a class="anchorlink">written by: {{blog.owner.username}}</a>
+  {% endfor %}
+</div>
 
 {% endblock %}

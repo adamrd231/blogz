@@ -11,6 +11,7 @@ db = SQLAlchemy(app)
 app.secret_key = "abc"
 
 #TODO WHY DOES CSS STYLING DISSAPEAR WHEN I AM NOT LOGGED IN?
+
 #Create class blogs, making them persistent and attaching the information to the database
 class Blog(db.Model):
 
@@ -31,6 +32,7 @@ class Blog(db.Model):
             return True
         else:
             return False
+
 
 class User(db.Model):
 
@@ -68,26 +70,23 @@ def index():
 @app.route('/blogs', methods=['POST', 'GET'])
 def blogs():
 
-    #THIS GRABS THE ID ATTRIBUTE FROM THE TITLE LINK (WHICH HAS THE VARIABLE INSIDE THE HTTP ADDRESS)
+
     blog_id = request.args.get('id')
     if (blog_id):
         blogs = Blog.query.filter_by(id=blog_id).first()
-        #TODO filter result so that the matching username is populated with the blog, not the 
-        user = User.query.filter_by().first()
-        return render_template('single_template.html', blogs=blogs, user=user)
+        return render_template('single_template.html', blogs=blogs)
 
+    user_name = request.args.get('username')
     user_id = request.args.get('user')
     if (user_id):
         blogs = Blog.query.filter_by(owner_id=user_id)
-        return render_template('single_user.html', blogs=blogs)
+        return render_template('single_user.html', blogs=blogs, user_name=user_name)
 
-    users = User.query.all()
+
     blogs = Blog.query.all()
-
     return render_template('blogs.html',
           title="BLOG",
-          users=users,
-          blogs=blogs
+          blogs=blogs,
           )
 
 
@@ -100,7 +99,7 @@ def login():
 
         if login_info and login_info.password == password:
             session['username'] = username
-            flash("Logged in")
+            flash(username + " is logged in",'atta_boy')
             return redirect('/new_post')
         else:
             flash('User name or password incorrect, or does not exist.')
@@ -111,7 +110,9 @@ def login():
 #TODO when logged in, takes you to the home screen, when logged out. Takes you to the login
 @app.route('/logout')
 def logout():
+    username = str(session['username'])
     del session['username']
+    flash(username + " has been logged out", 'atta_boy')
     return redirect('/')
 
 @app.route('/register', methods=['POST', 'GET'])

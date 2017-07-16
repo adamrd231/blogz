@@ -14,10 +14,8 @@
 <!-- MAKE SURE TO MATCH THE BLOGS VARIABLE PASSED IN FROM MAIN.PY -->
     {%for user in users %}
         <li>
-            <a href="/blogs?user={{user.id}}">{{user.username}}</a>
-      <!-- <input type="submit" value="Done!" /> -->
-          <!-- <input type="submit" value="Create Blog!" /> -->
-      </form>
+            <a class="title" href="/blogs?user={{user.id}}&username={{user.username}}">{{user.username}}</a>
+
 
     </li>
     {% endfor %}

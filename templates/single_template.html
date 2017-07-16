@@ -4,12 +4,13 @@
 
 <h1>{{blogs.title}}</h1>
 
- <br/>
-{{blogs.content}}
-<br />
-<!-- TODO figure out how to show owner name vs object -->
-{{blogs.owner_id}}
-<br />
-{{user.username}}
+<div class="all_blog">
+  <div class="title">
+    {{blogs.content}}
+  </div>
+  <div>
+    <a class="anchorlink">Written by: {{blogs.owner.username}}</a>
+  </div>
+</div>
 
 {% endblock %}

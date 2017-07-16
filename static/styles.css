@@ -12,6 +12,14 @@ input {
   width: 10em;
 }
 
+.title {
+  font-size: 1.5em;
+}
+
+.anchorlink {
+  font-size: .66em;
+}
+
 .navbar {
   display: flex;
   flex-direction: row;
@@ -40,4 +48,25 @@ input {
   margin:0;
   padding: 1%;
   list-style: none;
+}
+
+.atta_boy {
+  background-color: green;
+  color: white;
+  margin:0;
+  padding: 1%;
+  list-style: none;
+}
+
+.all_blog {
+  display: flex;
+  flex-direction: column;
+  padding: 3%;
+}
+
+.all_blog_entries {
+  display: flex;
+  flex-direction: column;:
+  padding-top: 1%;
+  padding-bottom: 1%;
 }
