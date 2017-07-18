@@ -7,9 +7,9 @@
 <!-- RUN A LOOP TO SHOW ALL OF THE BLOGS ASSOCIATED WITH A SINGLE USER -->
 <div class="all_blog">
   {% for blog in blogs %}
-  <a class="title" href="http://127.0.0.1:5000/blogs?id={{blog.id}}">{{blog.title}}</a>
-  {{blog.content}}
-  <a class="anchorlink">written by: {{blog.owner.username}}</a>
+  <div  class="title"><a href="http://127.0.0.1:5000/blogs?id={{blog.id}}">{{blog.title}}</a></div>
+  <div class="content">{{blog.content}}</div>
+  <div class="anchorlink">written by: {{blog.owner.username}}</div>
   {% endfor %}
 </div>
 

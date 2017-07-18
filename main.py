@@ -122,12 +122,13 @@ def register():
         password = request.form['password']
         verify = request.form['verify']
 
+        #Form validation for the registration checking that the user entered something
         if username == "" or password == "" or verify == "":
             flash('Please Enter a username, password and matching verification')
             return render_template('register.html', username=username)
 
 
-        # - Validate the users data
+        # - If username exists, assign it to the variable existing_user
         existing_user = User.query.filter_by(username=username).first()
 
 

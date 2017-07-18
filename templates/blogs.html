@@ -16,8 +16,8 @@
   {% for blog in blogs %}
         <div class="all_blog_entries">
           <a class="title" href="http://127.0.0.1:5000/blogs?id={{blog.id}}">{{blog.title}}</a>
-          {{blog.content}}
-          <a class="anchorlink" href="/blogs?user={{blog.owner.id}}&username={{blog.owner.username}}">{{blog.owner.username}}</a>
+          <div>{{blog.content}}</div>
+          <div>Written by: <a class="anchorlink" href="/blogs?user={{blog.owner.id}}&username={{blog.owner.username}}">{{blog.owner.username}}</a></div>
         </div>
   {% endfor %}
 </div>

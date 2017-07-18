@@ -6,10 +6,10 @@
 
 <div class="all_blog">
   <div class="title">
-    {{blogs.content}}
+    <div class="content">{{blogs.content}}</div>
   </div>
-  <div>
-    <a class="anchorlink">Written by: {{blogs.owner.username}}</a>
+  <div class="anchorlink">
+    Written by: <a href="/blogs?user={{blogs.owner.id}}&username={{blogs.owner.username}}">{{blogs.owner.username}}</a>
   </div>
 </div>
 
